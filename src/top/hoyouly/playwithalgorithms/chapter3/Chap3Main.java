@@ -37,8 +37,8 @@ public class Chap3Main {
 //                System.out.println(queue.toString());
 //            }
 //        }
-        int opCount = 1000000;
-        System.out.println("ArrayQueue: " + testQueue(new ArrayQueue(), opCount));
+        int opCount = 100000000;
+//        System.out.println("ArrayQueue: " + testQueue(new ArrayQueue(), opCount));
         System.out.println("LoopQueue: " + testQueue(new LoopQueue(), opCount));
         System.out.println("LinkedListQueue: " + testQueue(new LinkedListQueue(), opCount));
 
