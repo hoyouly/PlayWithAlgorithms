@@ -68,11 +68,23 @@ public class BST<E extends Comparable<E>> {
     }
 
     public boolean contains(E e) {
-        if (isEmpty()) {
+        return contains(root, e);
+    }
+
+    private boolean contains(Node<E> node, E e) {
+        if (node == null) {
             return false;
         }
-
-
+        //把原问题转换成更小的问题
+        if (e.compareTo(node.e) > 0) {
+            //把插入后的结果重新赋值给根节点的右节点，
+            return contains(node.right, e);
+        } else if (e.compareTo(node.e) < 0) {
+            //把插入后的结果重新赋值给根节点的坐节点，
+            return contains(node.left, e);
+        } else {
+            return true; 
+        }
     }
 
 }
