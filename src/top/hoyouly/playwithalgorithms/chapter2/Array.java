@@ -68,6 +68,14 @@ public class Array<T> {
         return data[index];
     }
 
+    public T getFirst() {
+        return get(0);
+    }
+
+    public T getLast() {
+        return get(size - 1);
+    }
+
     public void set(int index, T e) {
         if (index < 0 || index >= size) {
             new IllegalArgumentException("Set Failed . Index is Illegal");
