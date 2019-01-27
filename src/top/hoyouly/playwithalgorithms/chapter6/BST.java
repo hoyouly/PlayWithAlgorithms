@@ -42,38 +42,27 @@ public class BST<E extends Comparable<E>> {
     }
 
     public void add(E e) {
-        if (root == null) {
-            root = new Node(e);
-            size++;
-        } else {
-            add(root, e);
-        }
+        root = add(root, e);
     }
 
     //向root 的为根节点的BST中插入一个元素e,递归算法
-    private void add(Node<E> root, E e) {
+    //返回新插入新节点后二分搜索树的跟节点
+    private Node<E> add(Node<E> root, E e) {
         //递归终止条件  begin
-        if (e.equals(root.e)) {
-            //值相等，不做处理，
-            return;
-        } else if (e.compareTo(root.e) > 0 && root.right == null) {
-            //插入的值大于根节点的值并且根节点右节点为null，那么就插入到该根节点的右节点中
-            root.right = new Node(e);
-            size++;
-            return;
-        } else if (e.compareTo(root.e) < 0 && root.left == null) {
-            //插入的值小于根节点的值并且根节点左节点为null，那么就插入到该根节点的左节点中
-            root.left = new Node(e);
-            size++;
-            return;
-        }//递归终止条件  end
+        if (root == null) {
+            return new Node<>(e);
+        }
+        //递归终止条件  end
 
         //把原问题转换成更小的问题
         if (e.compareTo(root.e) > 0) {
-            add(root.right, e);
-        } else {
-            add(root.left, e);
+            //把插入后的结果重新赋值给根节点的右节点，
+            root.right = add(root.right, e);
+        } else if (e.compareTo(root.e) < 0) {
+            //把插入后的结果重新赋值给根节点的坐节点，
+            root.left = add(root.left, e);
         }
+        return root;
 
 
     }
