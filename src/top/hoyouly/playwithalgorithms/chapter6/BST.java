@@ -2,6 +2,9 @@ package top.hoyouly.playwithalgorithms.chapter6;
 
 import top.hoyouly.playwithalgorithms.chapter4.LinkedListStack;
 
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -128,6 +131,25 @@ public class BST<E extends Comparable<E>> {
             if (node.left != null) {
                 stack.push(node.left);
             }
+        }
+    }
+
+    //层级遍历
+    public void levelOrder() {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            System.out.print(node.e + "  ");
+            //因为队列的特性FIFO，所以先压入左节点，再压入右节点，
+            //这样出队列的时候就先出左节点，再出右节点
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+
         }
     }
 

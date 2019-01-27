@@ -18,6 +18,8 @@ public class Chap6Test {
         bst.inOrder();
         System.out.println("\n后序遍历：");
         bst.postOrder();
+        System.out.println("\n层序遍历：");
+        bst.levelOrder();
     }
 
 
