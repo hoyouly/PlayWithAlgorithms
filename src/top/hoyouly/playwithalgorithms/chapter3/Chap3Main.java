@@ -1,5 +1,7 @@
 package top.hoyouly.playwithalgorithms.chapter3;
 
+import top.hoyouly.playwithalgorithms.chapter4.LinkedListQueue;
+
 import java.util.Random;
 
 public class Chap3Main {
@@ -38,6 +40,7 @@ public class Chap3Main {
         int opCount = 1000000;
         System.out.println("ArrayQueue: " + testQueue(new ArrayQueue(), opCount));
         System.out.println("LoopQueue: " + testQueue(new LoopQueue(), opCount));
+        System.out.println("LinkedListQueue: " + testQueue(new LinkedListQueue(), opCount));
 
     }
 
