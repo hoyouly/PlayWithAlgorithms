@@ -1,5 +1,9 @@
 package top.hoyouly.playwithalgorithms.chapter6;
 
+import top.hoyouly.playwithalgorithms.chapter4.LinkedListStack;
+
+import java.util.Stack;
+
 /**
  * BST: Binary Search Tree 二分搜索树
  * <p>
@@ -103,6 +107,28 @@ public class BST<E extends Comparable<E>> {
         System.out.print(node.e + "  ");
         preOrder(node.left);
         preOrder(node.right);
+    }
+
+    //前序遍历的非递归实现  NR ： not recursion
+    public void preOrderNR() {
+        Stack<Node> stack = new Stack<>();
+        //先把根节点压入栈
+        stack.push(root);
+        //遍历结束的条件就是栈为null
+        while (!stack.isEmpty()) {
+            //得到栈顶元素
+            Node node = stack.pop();
+            //因为是前序遍历，所以访问的根节点
+            System.out.println(node);
+            //因为栈的特性和前序遍历，所以先压入右节点，再压入左节点，
+            //这样出栈的时候就先出左节点，再出右节点
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
     }
 
     //中序遍历

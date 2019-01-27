@@ -9,7 +9,9 @@ public class Chap6Test {
         for (int i = 0; i < arr.length; i++) {
             bst.add(arr[i]);
         }
-        System.out.println("前序遍历：");
+        System.out.println("前序遍历 递归：");
+        bst.preOrder();
+        System.out.println("\n前序遍历 非递归：");
         bst.preOrder();
 
         System.out.println("\n中序遍历：");
