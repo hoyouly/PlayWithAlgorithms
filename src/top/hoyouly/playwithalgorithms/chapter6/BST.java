@@ -83,8 +83,90 @@ public class BST<E extends Comparable<E>> {
             //把插入后的结果重新赋值给根节点的坐节点，
             return contains(node.left, e);
         } else {
-            return true; 
+            return true;
         }
+    }
+
+    //前序遍历
+    public void preOrder() {
+        preOrder(root);
+    }
+
+    //前序遍历，以node为根节点的BST，递归算法
+    private void preOrder(Node node) {
+        //递归终止条件
+        if (node == null) {
+            return;
+        }
+
+        //大问题化小问题
+        System.out.print(node.e + "  ");
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+
+    //中序遍历
+    public void inOrder() {
+        inOrder(root);
+    }
+
+    //中序遍历，以node为根节点的BST，递归算法
+    private void inOrder(Node<E> node) {
+        //递归终止条件
+        if (node == null) {
+            return;
+        }
+
+        //大问题化小问题
+        inOrder(node.left);
+        System.out.print(node.e + "  ");
+        inOrder(node.right);
+    }
+
+    //后序遍历
+    public void postOrder() {
+        postOrder(root);
+    }
+
+    //后序遍历，以node为根节点的BST，递归算法
+    private void postOrder(Node<E> node) {
+        //递归终止条件
+        if (node == null) {
+            return;
+        }
+
+        //大问题化小问题
+        postOrder(node.left);
+        postOrder(node.right);
+        System.out.print(node.e + "  ");
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        generateBSTString(root, 0, res);
+
+        return res.toString();
+    }
+
+    //生成以node为根节点，深度为depth的描述二叉树字符串
+    private void generateBSTString(Node<E> node, int depth, StringBuilder res) {
+        if (node == null) {
+            res.append(generateDepthString(depth) + " null\n");
+            return;
+        }
+
+        generateBSTString(node.left, depth + 1, res);
+        generateBSTString(node.right, depth + 1, res);
+
+    }
+
+    private String generateDepthString(int depth) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < depth; i++) {
+            res.append("--");
+        }
+        return res.toString();
     }
 
 }
