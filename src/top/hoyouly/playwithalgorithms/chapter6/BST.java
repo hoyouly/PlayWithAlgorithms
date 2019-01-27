@@ -1,8 +1,5 @@
 package top.hoyouly.playwithalgorithms.chapter6;
 
-import top.hoyouly.playwithalgorithms.chapter4.LinkedListStack;
-
-import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -21,8 +18,8 @@ public class BST<E extends Comparable<E>> {
 
     private class Node<E> {
         E e;
-        Node left;
-        Node right;
+        Node<E> left;
+        Node<E> right;
 
         public Node(E e) {
             this.e = e;
@@ -57,6 +54,7 @@ public class BST<E extends Comparable<E>> {
     private Node<E> add(Node<E> root, E e) {
         //递归终止条件  begin
         if (root == null) {
+            size++;
             return new Node<>(e);
         }
         //递归终止条件  end
@@ -189,6 +187,130 @@ public class BST<E extends Comparable<E>> {
         System.out.print(node.e + "  ");
     }
 
+
+    //得到BST的最小值
+    public E minimum() {
+        if (isEmpty()) {
+            throw new IllegalArgumentException("BST is empyt");
+        }
+        return minimum(root).e;
+    }
+
+    //返回以node为根节点的最小值的节点
+    private Node<E> minimum(Node<E> node) {
+        if (node.left == null) {
+            return node;
+        }
+        return minimum(node.left);
+    }
+
+    //得到BST的最大值
+    public E maximum() {
+        if (isEmpty()) {
+            throw new IllegalArgumentException("BST is empyt");
+        }
+        return maximum(root);
+    }
+
+    //返回以node为根节点的最大值的节点
+    private E maximum(Node<E> node) {
+        if (node.right == null) {
+            return node.e;
+        }
+        return maximum(node.right);
+    }
+
+    //删除最小值
+    public E removeMin() {
+        E ret = minimum();
+        //更新root
+        root = removeMin(root);
+        return ret;
+    }
+
+    private Node<E> removeMin(Node<E> node) {
+        if (node.left == null) {
+            //找到最小值，保留最小值右节点
+            Node<E> rightNode = node.right;
+            node.right = null;
+            size--;
+            //并且返回这个右节点
+            return rightNode;
+        }
+
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    //删除最大值
+    public E removeMax() {
+        E ret = maximum();
+        //更新root
+        root = removeMax(root);
+        return ret;
+    }
+
+    private Node<E> removeMax(Node<E> node) {
+        if (node.right == null) {
+            //找到最小值，保留最小值的左节点，这个就是新的节点了
+            Node<E> leftNode = node.left;
+            node.left = null;
+            size--;
+            //并且返回这个右节点
+            return leftNode;
+        }
+
+        node.right = removeMax(node.right);
+        return node;
+    }
+
+
+    public void remove(E e) {
+        //找到这个节点
+
+        root = remove(root, e);
+
+    }
+
+    private Node<E> remove(Node<E> node, E e) {
+        if (node == null) {
+            return null;
+        }
+
+        if (e.compareTo(node.e) < 0) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if (e.compareTo(node.e) > 0) {
+            node.right = remove(node.right, e);
+            return node;
+        } else {//要删除的就是node 节点
+            if (node.left == null) {
+                Node<E> rightNode = node.right;
+                size--;
+                node.right = null;
+                return rightNode;
+            }
+            if (node.right == null) {
+                Node<E> leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }
+
+            //删除节点左右节点都存在
+            //找到后继结点
+            Node successor = minimum(node.right);
+            //删除最小节点，并且后继结点的右节点指向该删除后的节点
+            successor.right = removeMin(node.right);
+            //要删除的做节点赋值给后继结点
+            successor.left = node.left;
+            //删除节点
+            node.left = node.right = null;
+            //返回这个后继结点
+            return successor;
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -203,7 +325,7 @@ public class BST<E extends Comparable<E>> {
             res.append(generateDepthString(depth) + " null\n");
             return;
         }
-
+        res.append(generateDepthString(depth) + " " + node.e + "\n");
         generateBSTString(node.left, depth + 1, res);
         generateBSTString(node.right, depth + 1, res);
 
