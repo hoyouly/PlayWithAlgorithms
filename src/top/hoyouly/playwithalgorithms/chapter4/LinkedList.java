@@ -122,34 +122,51 @@ public class LinkedList<E> {
         return false;
     }
 
-    public E remove(int index){
+    public E remove(int index) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("set Fail,  Illgal index");
         }
 
-        Node prv=dummyhead;
+        Node prv = dummyhead;
         //找到待删除节点的前一个节点
         for (int i = 0; i < index; i++) {
-            prv=prv.next;
+            prv = prv.next;
         }
         //保存待删除的节点
-        Node<E> delNode=prv.next;
+        Node<E> delNode = prv.next;
         //待删除的前一个节点指向待删除的后一个节点
-        prv.next=delNode.next;
+        prv.next = delNode.next;
         //待删除的节点指向null，这样就脱离了链表，也方便GC回收
-        delNode.next=null;
+        delNode.next = null;
         size--;
         return delNode.e;
     }
 
-    public E removeFirst(){
+    public E removeFirst() {
         return remove(0);
     }
 
-    public E removeLast(){
-        return remove(size-1);
+    public E removeLast() {
+        return remove(size - 1);
     }
 
+
+    public void removeElement(E e) {
+        Node pre = dummyhead;
+        while (pre.next != null) {
+            if (pre.next.e.equals(e)) {
+                break;//找到了要删除元素的前一个元素，
+            }
+            pre = pre.next;
+        }
+
+        //执行删除操作。
+        if (pre.next != null) {
+            Node deleNode = pre.next;
+            pre.next = deleNode.next;
+            deleNode.next = null;
+        }
+    }
 
     @Override
     public String toString() {
