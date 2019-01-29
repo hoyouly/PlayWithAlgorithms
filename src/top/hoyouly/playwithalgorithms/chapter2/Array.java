@@ -15,6 +15,15 @@ public class Array<T> {
         this(10);
     }
 
+    //给定一个数组，变成一个动态数组
+    public Array(T[] arr) {
+        data = (T[]) new Object[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            data[i] = arr[i];
+        }
+        size = arr.length;
+    }
+
     public int getSize() {
         return size;
     }
@@ -134,6 +143,17 @@ public class Array<T> {
         if (index != -1) {
             remove(index);
         }
+    }
+
+    //交换索引i和j对应的值
+
+    public void swap(int i, int j) {
+        if (i < 0 || i >= size || j < 0 || j >= size) {
+            throw new IllegalArgumentException("Index is Illegal");
+        }
+        T t = data[i];
+        data[i] = data[j];
+        data[j] = t;
     }
 
 
