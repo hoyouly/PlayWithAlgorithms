@@ -1,6 +1,7 @@
 package top.hoyouly.playwithalgorithms.chapter12;
 
 
+import top.hoyouly.playwithalgorithms.chapter13.RBTree;
 import top.hoyouly.playwithalgorithms.chapter7.*;
 
 import java.util.ArrayList;
@@ -10,7 +11,8 @@ public class Chap12Test {
 
     public static void main(String[] args) {
         testAVL();
-//        testBST();
+        testBST();
+        testRBTree();
     }
 
     private static void testAVL() {
@@ -41,7 +43,6 @@ public class Chap12Test {
                 return;
             }
         }
-        System.out.println("dddddddddddd");
     }
 
     private static void testBST() {
@@ -65,8 +66,30 @@ public class Chap12Test {
 
         System.out.println("Frequency of prejudice : BST time  " + ((System.currentTimeMillis() - startTime) / 1000.0));
 
-
     }
 
+
+    private static void testRBTree() {
+        System.out.println("pride-and-prejudice: ");
+        ArrayList<String> words = new ArrayList<>();
+        FileOperation.readFile("pride-and-prejudice.txt", words);
+        System.out.println("Total words: " + words.size());
+        long startTime = System.currentTimeMillis();
+
+        RBTree<String, Integer> map = new RBTree<>();
+        for (String word : words) {
+            if (map.contains(word)) {
+                map.set(word, map.get(word) + 1);
+            } else {
+                map.add(word, 1);
+            }
+        }
+        for (String word : words) {
+            map.contains(word);
+        }
+
+        System.out.println("Frequency of prejudice : RBTree time  " + ((System.currentTimeMillis() - startTime) / 1000.0));
+
+    }
 
 }
