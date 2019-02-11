@@ -2,6 +2,10 @@ package top.hoyouly.playwithalgorithms.chapter3;
 
 import top.hoyouly.playwithalgorithms.chapter2.Array;
 
+/**
+ * 使用动态数组实现栈的功能
+ * @param <T>
+ */
 public class ArrayStack<T> implements Stack<T> {
 
     private Array<T> data;

@@ -1,6 +1,6 @@
 package top.hoyouly.playwithalgorithms.chapter2;
 
-
+//创建一个动态数组
 public class Array<T> {
 
     private T[] data;

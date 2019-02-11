@@ -2,6 +2,9 @@ package top.hoyouly.playwithalgorithms.chapter3;
 
 import top.hoyouly.playwithalgorithms.chapter2.Array;
 
+/**
+ * 用动态数组实现栈
+ */
 public class ArrayQueue<T> implements Queue<T> {
     private Array<T> array;
 
